@@ -1,32 +1,56 @@
-# DeepFakeAdversal
+# DeepFake Adversarial Attack 연구
 
-- 한국인 논문
-Exploiting Style Latent Flows for Generalizing Deepfake Video Detection
-https://arxiv.org/pdf/2403.06592
+## 관련 논문
 
-- 핵심 논문
-Face_Poison_Obstructing_DeepFakes_by_Disrupting_Face_Detection
-https://ieeexplore.ieee.org/document/10220056
+1. **한국인 논문:**
+   - 제목: [Exploiting Style Latent Flows for Generalizing Deepfake Video Detection](https://arxiv.org/pdf/2403.06592)
 
-- 관련 논문
-Landmark Breaker Obstructing DeepFake By
-https://arxiv.org/abs/2102.00798
+2. **핵심 논문:**
+   - 제목: [Face Poison: Obstructing DeepFakes by Disrupting Face Detection](https://ieeexplore.ieee.org/document/10220056)
 
-**핵심 : 현재 모든 방법론들은 특정 모델로 Train Data를 망가트리는 것이 아닌 어떠한 Method를 사용하는 것임 -> 깃헙 코드가 없고, 방법론을 보고 구현해야함**
+3. **관련 논문:**
+   - 제목: [Landmark Breaker Obstructing DeepFake](https://arxiv.org/abs/2102.00798)
 
-**Face_Poison_Obstructing_DeepFakes_by_Disrupting_Face_Detection**
+---
 
-큰 내용 정리
-1. 우선 특정 모델을 타겟으로 하는 것이 맞음. 하지만 Deepfake 모델이 아닌 Face-Detector 모델을 공격함. (모든 DeepFake 모델은 Face-Detecting이 필수적임) 이 방법의 장점은 모든 딥페이크 모델에 강건하게 대응할 수 있다는 것. 그래서 Deepfake 모델들이 이런 데이터들로 훈련을 하면 결과가 멍청해지는 것임.
-2. 특정 모델의 "레이어"를 타겟으로 공격 (Multi-scale feature-level adversarial attack)
-3. 그렇게 생선된 이미지를 딥페이크 모델 훈련 과에 넣으면 육안으로 볼 땐 똑같지만 모델 생성 결과가 박살남. (얼굴을 학습시킬 때 Train Image에 어디가 얼굴이라고 라벨링이 되어있다는 점을 생각하면 쉬움)
+## 연구 핵심 요약
 
-작은 내용 정리
-1. Multi-scale feature-level adversarial attack (MSFLA)
-   1-1. 현재 DTCNN 등 모든 SOTA Face-Detector 들은 DNN 모델들임.
-   1-2. 인코더는 ReLU, CNN, FCNN 등이 아주 여러개가 쌓인 우리가 일반적으로 사용하는 딥러닝 모델임.
-   1-3. MSFLA는 이 중 특정 몇개의 레이어를 타겟으로 삼음.
-   1-4. 오리지널이미지가 특정 레이어를 통과할때의 특징을 약간씩 Posion을 넣어서 이미지를 망가트리는 느낌.
-   1-5. 이렇게 Face-Detecting의 결과가 나오면 당연히 이미지는 눈으로 볼때 멀쩡함. 하지만 Face-Detector들은 얼굴 인식을 못함. **이미지 자체를 공격하는 것이 아님!**
+**모든 딥페이크 모델을 대상으로 강건한 방어 전략:**
 
+현재 모든 방법론은 특정 모델의 학습 데이터를 망가뜨리는 것이 아닌, **어떠한 방식을 통해 학습 과정 자체를 방해하는** 방법론입니다. 해당 논문의 방법론은 GitHub 코드가 제공되지 않으므로, 논문을 기반으로 직접 구현이 필요합니다.
+
+---
+
+## 논문 상세 요약: Face Poison
+
+### 주요 내용 정리
+
+1. **특정 모델을 타겟으로 한 공격:**
+   - DeepFake 모델이 아닌 **Face-Detector 모델을 공격**합니다. 모든 딥페이크 모델은 얼굴 인식이 필수이기 때문에, 이 방식을 사용하면 모든 딥페이크 모델에 강건하게 대응할 수 있습니다.
+
+2. **Multi-scale feature-level adversarial attack:**
+   - 특정 모델의 **여러 레이어를 타겟으로 공격**하여 이미지를 변형합니다.
+
+3. **훈련 데이터의 이미지 교란:**
+   - 변형된 이미지는 육안으로는 멀쩡해 보이지만, **딥페이크 모델이 훈련을 통해 생성하는 결과를 무너뜨립니다.**
+   - 특히 **얼굴 검출 과정에서** 라벨링된 얼굴 이미지가 공격을 받습니다.
+
+---
+
+### 추가 내용 정리
+
+1. **Multi-scale feature-level adversarial attack (MSFLA)**:
+   - SOTA(Sota) Face-Detector 모델들은 모두 DNN 기반입니다.
+   - 인코더는 ReLU, CNN, FCNN 등 여러 레이어로 이루어진 딥러닝 모델입니다.
+   - MSFLA는 **특정 레이어를 타겟으로 삼아 공격**을 수행합니다.
+   - 원본 이미지를 통과시킬 때, **특정 레이어에서 약간의 교란(Poison)을 주어 이미지가 변형**됩니다.
+   - 변형된 이미지는 육안으로는 멀쩡해 보이지만, **Face-Detector는 얼굴을 인식하지 못하게 됩니다.**
+   - **이미지 자체를 공격하는 것이 아닙니다.** 얼굴 인식 시스템에만 영향을 미칩니다.
+
+---
+
+## 참고 링크
+- [Exploiting Style Latent Flows 논문 PDF](https://arxiv.org/pdf/2403.06592)
+- [Face Poison 논문 PDF](https://ieeexplore.ieee.org/document/10220056)
+- [Landmark Breaker 논문 PDF](https://arxiv.org/abs/2102.00798)
 
