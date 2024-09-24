@@ -6,9 +6,10 @@
    - 제목: [Exploiting Style Latent Flows for Generalizing Deepfake Video Detection](https://arxiv.org/pdf/2403.06592)
 
 2. **핵심 논문:**
+   - 제목: [Nightshade: Prompt-Specific Poisoning Attacks on Text-to-Image Generative Models](https://arxiv.org/abs/2310.13828)
    - 제목: [Face Poison: Obstructing DeepFakes by Disrupting Face Detection](https://ieeexplore.ieee.org/document/10220056)
 
-3. **관련 논문:**
+4. **관련 논문:**
    - 제목: [Landmark Breaker Obstructing DeepFake](https://arxiv.org/abs/2102.00798)
 
 ---
