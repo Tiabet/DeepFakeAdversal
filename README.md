@@ -50,6 +50,8 @@
 
 ---
 
+## 논문 상세 요약 : Nightshade
+
 ## 참고 링크
 - [Exploiting Style Latent Flows 논문 PDF](https://arxiv.org/pdf/2403.06592)
 - [Face Poison 논문 PDF](https://ieeexplore.ieee.org/document/10220056)
