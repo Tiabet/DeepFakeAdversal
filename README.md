@@ -1,4 +1,5 @@
 # DeepFake Adversarial Attack 연구 (수정중)
+이미지 링크 넣고 지피티로 말 깔끔하게 돌리기
 
 ## 관련 논문
 
