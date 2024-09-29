@@ -14,7 +14,11 @@
    - 제목: [Landmark Breaker Obstructing DeepFake](https://arxiv.org/abs/2102.00798)
 
 ---
-
+## 사용 모델
+1. **Deepfake**
+2. **FaceDetector**
+3. **StableDiffusion**
+---
 ## 연구 핵심 요약
 
 **모든 딥페이크 모델을 대상으로 강건한 방어 전략:**
