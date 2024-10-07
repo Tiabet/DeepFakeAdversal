@@ -1,50 +1,51 @@
-FaceSwap의 Extraction 과정
+# FaceSwap Extraction 과정
 
-1. Detection : 사진 안에서 얼굴을 찾음.
-2. Alignment : 얼굴 안의 다양한 landmark를 찾고, 얼굴을 가운데로 위치시킴. 얼굴 안의 눈, 코, 입 등을 찾음.
-3. 얼굴 빼고 나머지는 삭제시킴.
+FaceSwap은 얼굴을 인식하고 교체하는 과정을 다음과 같은 3단계로 나누어 진행합니다:
 
-따라서 공격은 Detection과정에서나 Alignment 과정에서 일어날 수 있을 듯.
+1. **Detection (탐지)**: 이미지 안에서 얼굴을 찾습니다.
+2. **Alignment (정렬)**: 얼굴의 다양한 랜드마크(눈, 코, 입 등)를 찾고, 얼굴을 가운데로 위치시킵니다.
+3. **Masking (마스킹)**: 얼굴을 제외한 나머지 영역을 삭제합니다.
 
-![image](https://github.com/user-attachments/assets/6cd7bdb5-0a51-45fd-95de-5a07f6dd6df5)
-Alignment 예시
+즉, 공격은 Detection(탐지) 단계나 Alignment(정렬) 단계에서 이루어질 가능성이 큽니다.
 
-Faceswap은 3단계의 과정에서 각각 다른 3개의 모델을 사용하게 됨 (Detector, Aligner, Masker)
+![Alignment 과정 예시](https://github.com/user-attachments/assets/6cd7bdb5-0a51-45fd-95de-5a07f6dd6df5)
 
-![image](https://github.com/user-attachments/assets/78b46c82-b84c-4899-b366-af6850ba1dce)
+FaceSwap은 위 세 단계에서 각각 다른 세 개의 모델을 사용합니다: **Detector(탐지기)**, **Aligner(정렬기)**, **Masker(마스커)**.
 
-여기서 External은 만약 다른 모델로 처리한 정보가 있으면 갖고오라는 의미.
-Detector에선 S3Fd가, Aligner에선 Fan이 최고 성능이라고 말하고 있음. (추가확인필요)
+![FaceSwap 모델](https://github.com/user-attachments/assets/78b46c82-b84c-4899-b366-af6850ba1dce)
 
-모델 설명
+여기서 'External'은 외부에서 처리된 정보를 가져오라는 의미입니다.  
+**Detector** 단계에서는 **S3FD**가, **Aligner** 단계에서는 **FAN**이 최고 성능을 보인다고 합니다. (추가 확인 필요)
 
-Detector
+---
 
-CV2-DNN
-OPENCV 라이브러리의 FaceDetector
-https://github.com/opencv/opencv/tree/master/samples/dnn/face_detector
-구조를 확인해보면 CNN을 겹겹이 쌓은 것을 알 수 있음 (ResNet기반으로 보임)
+## 각 모델 설명
 
-MTCNN
-P-net, R-net, O-net 으로 이루어진 Multi-Task Cascaded CNN
-https://github.com/ipazc/mtcnn
-얼굴로 확인되는 곳에 박스를 치고, landmark까지 찾아줌
+### Detector (탐지기)
 
-S3FD
-https://github.com/sfzhang15/SFD
-얼굴 크기가 작든 크든 다 얼굴로 인식할 수 있는 모델
-VGG16같은 CNN기반 모델로 한 번 feature extraction을 진행하고, multi-scale feature layers를 통과하면서 다양한 크기의 얼굴 탐지.
-다양한 크기의 얼굴 중 진짜 얼굴이 어디인지 최종결정.
+1. **CV2-DNN**  
+   OpenCV 라이브러리의 FaceDetector입니다.  
+   - [CV2-DNN FaceDetector GitHub](https://github.com/opencv/opencv/tree/master/samples/dnn/face_detector)  
+   구조를 살펴보면 CNN이 여러 겹 쌓인 것을 확인할 수 있습니다. ResNet 기반으로 보입니다.
 
-Alginer
+2. **MTCNN**  
+   Multi-Task Cascaded CNN으로, **P-net**, **R-net**, **O-net**으로 이루어져 있습니다.  
+   - [MTCNN GitHub](https://github.com/ipazc/mtcnn)  
+   얼굴이 인식된 곳에 박스를 치고, 랜드마크까지 찾아줍니다.
 
-CN2-DNN
-Detector의 것과 동일
+3. **S3FD**  
+   얼굴 크기와 관계없이 얼굴을 정확하게 인식할 수 있는 모델입니다.  
+   - [S3FD GitHub](https://github.com/sfzhang15/SFD)  
+   VGG16 기반의 CNN 모델로 한 번 feature extraction을 진행하고, multi-scale feature layers를 통과하여 다양한 크기의 얼굴을 탐지합니다. 다양한 크기의 얼굴 중 실제 얼굴을 최종 결정합니다.
 
-Fan
-https://github.com/1adrianb/face-alignment
-다양한 표정, 각도에서도 얼굴의 특징을 정확히 align할 수 있는 모델 (SOTA인 이유인듯)
-Hourglass Network 사용 (feature maps에 대해 downsampling과 upsampling을 같이 진행하는 symmetric network)
-매 Network마다 align의 가능성을 계산해서 heatmap을 그림
+---
 
+### Aligner (정렬기)
 
+1. **CN2-DNN**  
+   Detector에서 사용되는 것과 동일한 구조입니다.
+
+2. **FAN**  
+   다양한 표정과 각도에서도 얼굴의 특징을 정확히 정렬할 수 있는 모델입니다. 현재 SOTA(State of the Art) 모델로, Hourglass Network를 사용합니다.  
+   - [FAN GitHub](https://github.com/1adrianb/face-alignment)  
+   Hourglass Network는 feature maps에 대해 downsampling과 upsampling을 동시에 수행하는 대칭적인 네트워크입니다. 각 Network에서 align 가능성을 계산하고, 이를 바탕으로 heatmap을 그립니다.
