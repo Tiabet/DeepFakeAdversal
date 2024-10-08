@@ -15,7 +15,8 @@ FaceSwap은 위 세 단계에서 각각 다른 세 개의 모델을 사용합니
 ![FaceSwap 모델](https://github.com/user-attachments/assets/78b46c82-b84c-4899-b366-af6850ba1dce)
 
 여기서 'External'은 외부에서 처리된 정보를 가져오라는 의미입니다.  
-**Detector** 단계에서는 **S3FD**가, **Aligner** 단계에서는 **FAN**이 최고 성능을 보인다고 합니다. (추가 확인 필요)
+**Detector** 단계에서는 **S3FD**가, **Aligner** 단계에서는 **FAN**이 최고 성능을 보인다고 합니다.
+하지만 paperswithcode 확인 결과 Face Detection에서 S3FD는 21위, FAN은 8위 수준으로 보입니다.
 
 ---
 
