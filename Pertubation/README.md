@@ -26,7 +26,7 @@
 - **논문**: [Towards Deep Learning Models Resistant to Adversarial Attacks](https://arxiv.org/abs/1706.06083)  
 - **핵심 아이디어**: 여러 단계로 나눠 반복적인 그래디언트 업데이트를 통해 강력한 교란을 생성함.  
 - **기법 설명**:  
-  ![PGD Equation](https://latex.codecogs.com/png.latex?x^{(t+1)}%20=%20\Pi_{B(x,%20\epsilon)}(x^{(t)}%20+%20\alpha%20\cdot%20\text{sign}(\nabla_x%20J(\theta,%20x^{(t)},%20y))))  
+  $x^{(t+1)} = \Pi_{B(x, \epsilon)}\left( x^{(t)} + \alpha \cdot \text{sign}\left( \nabla_x J(\theta, x^{(t)}, y) \right) \right)$
   - $\(B(x, \epsilon)\)은 허용 범위, \(\alpha\)는 학습률임.  $
 - **의의**: FGSM보다 강력하며 다양한 연구에서 방어 기준으로 자주 사용됨.
 
