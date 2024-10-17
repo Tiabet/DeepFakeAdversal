@@ -27,9 +27,7 @@
 - **핵심 아이디어**: 여러 단계로 나눠 반복적인 그래디언트 업데이트를 통해 강력한 교란을 생성함.  
 - **기법 설명**:  
   $
-  \[
 x^{(t+1)} = \Pi_{B(x, \epsilon)}\left( x^{(t)} + \alpha \cdot \text{sign}\left( \nabla_x J(\theta, x^{(t)}, y) \right) \right)
-\]
 $
 
   - $\(B(x, \epsilon)\)은 허용 범위, \(\alpha\)는 학습률임.  $
