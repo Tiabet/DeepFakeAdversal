@@ -7,7 +7,7 @@
 - **핵심 아이디어**: 손실 함수의 그래디언트 방향으로 교란을 추가해 모델을 공격함.  
 - **기법 설명**:  
   텍스트 중간에 수식을 사용:  
-  $ \eta = \epsilon \cdot \text{sign}(\nabla_x J(\theta, x, y)) $  
+  $\eta = \epsilon \cdot \text{sign}(\nabla_x J(\theta, x, y))$  
   - 변형된 이미지: $ x' = x + \eta $  
 - **의의**: 빠르고 계산 효율적이지만 단순해 쉽게 방어될 수 있음.
 
@@ -17,9 +17,7 @@
 - **논문**: [Towards Evaluating the Robustness of Neural Networks](https://arxiv.org/abs/1608.04644)  
 - **핵심 아이디어**: 최적화 기반으로 교란의 은밀함을 극대화해 강력한 공격을 수행함.  
 - **기법 설명**:  
-  $$ 
-  f(x') = \max(Z(x')_y - \max_{i \neq y} Z(x')_i, -\kappa) 
-  $$  
+  $$f(x') = \max(Z(x')_y - \max_{i \neq y} Z(x')_i, -\kappa)$$  
   - 여기서 $Z(x')$는 모델의 로짓 값, $y$는 원래 클래스임.  
 - **의의**: 최적화된 교란으로 기존 방어 메커니즘을 쉽게 우회할 수 있음.
 
