@@ -6,7 +6,7 @@
 - **논문**: [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572)  
 - **핵심 아이디어**: 손실 함수의 그래디언트 방향으로 교란을 추가해 모델을 공격하는 방법임.  
 - **기법 설명**:  
-  - 손실 \(J(\theta, x, y)\)의 그래디언트를 계산해 그 부호(sign)를 이용한 교란 \( \eta = \epsilon \cdot \text{sign}(\nabla_x J(\theta, x, y)) \) 생성.  
+  - 손실 \(J(\theta, x, y)\)의 그래디언트를 계산해 부호(sign)를 이용한 교란 \(\eta = \epsilon \cdot \text{sign}(\nabla_x J(\theta, x, y))\)을 생성함.  
   - 변형된 이미지 \(x' = x + \eta\)는 원래 클래스와 다른 결과를 유도함.  
 - **의의**: 빠르고 계산 효율적이지만 단순한 구조로 인해 쉽게 방어당할 수 있음.
 
