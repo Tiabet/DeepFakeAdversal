@@ -6,7 +6,7 @@
 - **논문**: [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572)  
 - **핵심 아이디어**: 손실 함수의 그래디언트 방향으로 교란을 추가해 모델을 공격함.  
 - **기법 설명**:  
-- $\eta = \epsilon \cdot \text{sign}\left( \nabla_x J(\theta, x, y) \right)$
+  - $\eta = \epsilon \cdot \text{sign}\left( \nabla_x J(\theta, x, y) \right)$
 - **의의**: 빠르고 계산 효율적이지만 단순해 쉽게 방어될 수 있음.
 
 ---
