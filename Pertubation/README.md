@@ -6,9 +6,8 @@
 - **논문**: [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572)  
 - **핵심 아이디어**: 손실 함수의 그래디언트 방향으로 교란을 추가해 모델을 공격함.  
 - **기법 설명**:  
-  텍스트 중간에 수식을 사용:  
-  $ \eta = \epsilon \cdot \text{sign}(\nabla_x J(\theta, x, y)) $  
-  - 변형된 이미지: $ x' = x + \eta $  
+  ![FGSM Equation](https://latex.codecogs.com/png.latex?\eta%20=%20\epsilon%20\cdot%20\text{sign}(\nabla_x%20J(\theta,%20x,%20y)))  
+  - 변형된 이미지: ![Transformed Image](https://latex.codecogs.com/png.latex?x%27%20=%20x%20+%20\eta)  
 - **의의**: 빠르고 계산 효율적이지만 단순해 쉽게 방어될 수 있음.
 
 ---
@@ -17,8 +16,8 @@
 - **논문**: [Towards Evaluating the Robustness of Neural Networks](https://arxiv.org/abs/1608.04644)  
 - **핵심 아이디어**: 최적화 기반으로 교란의 은밀함을 극대화해 강력한 공격을 수행함.  
 - **기법 설명**:  
-  $$ f(x') = \max(Z(x')_y - \max_{i \neq y} Z(x')_i, -\kappa) $$  
-  - 여기서 $Z(x')$는 모델의 로짓 값, $y$는 원래 클래스임.  
+  ![CW Equation](https://latex.codecogs.com/png.latex?f(x%27)%20=%20\max(Z(x%27)_y%20-%20\max_{i%20\neq%20y}%20Z(x%27)_i,%20-\kappa))  
+  - 여기서 \(Z(x')\)는 모델의 로짓 값, \(y\)는 원래 클래스임.  
 - **의의**: 최적화된 교란으로 기존 방어 메커니즘을 쉽게 우회할 수 있음.
 
 ---
@@ -27,10 +26,8 @@
 - **논문**: [Towards Deep Learning Models Resistant to Adversarial Attacks](https://arxiv.org/abs/1706.06083)  
 - **핵심 아이디어**: 여러 단계로 나눠 반복적인 그래디언트 업데이트를 통해 강력한 교란을 생성함.  
 - **기법 설명**:  
-  $$
-  x^{(t+1)} = \Pi_{B(x, \epsilon)}(x^{(t)} + \alpha \cdot \text{sign}(\nabla_x J(\theta, x^{(t)}, y)))
-  $$
-  - $B(x, \epsilon)$은 허용 범위, $\alpha$는 학습률임.  
+  ![PGD Equation](https://latex.codecogs.com/png.latex?x^{(t+1)}%20=%20\Pi_{B(x,%20\epsilon)}(x^{(t)}%20+%20\alpha%20\cdot%20\text{sign}(\nabla_x%20J(\theta,%20x^{(t)},%20y))))  
+  - \(B(x, \epsilon)\)은 허용 범위, \(\alpha\)는 학습률임.  
 - **의의**: FGSM보다 강력하며 다양한 연구에서 방어 기준으로 자주 사용됨.
 
 ---
