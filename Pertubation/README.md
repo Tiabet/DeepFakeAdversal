@@ -6,8 +6,7 @@
 - **논문**: [Explaining and Harnessing Adversarial Examples](https://arxiv.org/abs/1412.6572)  
 - **핵심 아이디어**: 손실 함수의 그래디언트 방향으로 교란을 추가해 모델을 공격함.  
 - **기법 설명**:  
-  ![FGSM Equation](https://latex.codecogs.com/png.latex?\eta%20=%20\epsilon%20\cdot%20\text{sign}(\nabla_x%20J(\theta,%20x,%20y)))  
-  - 변형된 이미지: ![Transformed Image](https://latex.codecogs.com/png.latex?x%27%20=%20x%20+%20\eta)  
+- $\eta = \epsilon \cdot \text{sign}\left( \nabla_x J(\theta, x, y) \right)$
 - **의의**: 빠르고 계산 효율적이지만 단순해 쉽게 방어될 수 있음.
 
 ---
@@ -16,7 +15,7 @@
 - **논문**: [Towards Evaluating the Robustness of Neural Networks](https://arxiv.org/abs/1608.04644)  
 - **핵심 아이디어**: 최적화 기반으로 교란의 은밀함을 극대화해 강력한 공격을 수행함.  
 - **기법 설명**:  
-  ![CW Equation](https://latex.codecogs.com/png.latex?f(x%27)%20=%20\max(Z(x%27)_y%20-%20\max_{i%20\neq%20y}%20Z(x%27)_i,%20-\kappa))  
+  $f(x') = \max\left( Z(x')_y - \max_{i \neq y} Z(x')_i, -\kappa \right)$
   - $여기서 \(Z(x')\)는 모델의 로짓 값, \(y\)는 원래 클래스임.$  
 - **의의**: 최적화된 교란으로 기존 방어 메커니즘을 쉽게 우회할 수 있음.
 
