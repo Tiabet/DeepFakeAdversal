@@ -29,7 +29,8 @@
   $
   \[
 x^{(t+1)} = \Pi_{B(x, \epsilon)}\left( x^{(t)} + \alpha \cdot \text{sign}\left( \nabla_x J(\theta, x^{(t)}, y) \right) \right)
-\]$
+\]
+$
 
   - $\(B(x, \epsilon)\)은 허용 범위, \(\alpha\)는 학습률임.  $
 - **의의**: FGSM보다 강력하며 다양한 연구에서 방어 기준으로 자주 사용됨.
