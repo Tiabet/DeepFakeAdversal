@@ -16,7 +16,7 @@
 - **핵심 아이디어**: 최적화 기반으로 교란의 은밀함을 극대화해 강력한 공격을 수행함.  
 - **기법 설명**:  
   - $$
-f(x') = \max \left( Z(x')_y - \max_{i \neq y} Z(x')_i, -\kappa \right)
+f(x') = \max \left( Z(x')_y - \max{i \neq y} Z(x')_i, -\kappa \right)
 $$
 
   - $여기서 \(Z(x')\)는 모델의 로짓 값, \(y\)는 원래 클래스임.$  
