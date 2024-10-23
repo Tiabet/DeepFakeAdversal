@@ -50,7 +50,7 @@
 
 ---
 
-### 6. **CPO (Critical Part Optimization) - 2023**
+### 6. **CPO (Centralized Perturbation Optimization) - 2023**
 - **논문**: [Quantization Matrix Optimization for Adversarial Attacks](https://arxiv.org/abs/2312.06199)  
 - **핵심 아이디어**: CNN이 가장 효과적으로 분석할 부분을 찾아 최소한의 교란으로 공격함.  
 - **기법 설명**:  
