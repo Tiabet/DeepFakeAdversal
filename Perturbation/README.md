@@ -16,7 +16,7 @@
 - **논문**: [Towards Evaluating the Robustness of Neural Networks](https://arxiv.org/abs/1608.04644)  
 - **핵심 아이디어**: 최적화 기반으로 교란의 은밀함을 극대화해 강력한 공격을 수행함.  
 - **기법 설명**:  
-  - $손실 함수 \(f(x') = \max(Z(x')_y - \underset\max{i \neq y} Z(x')_i, -\kappa)\) 최소화하는 최적화 문제 설정.$  
+  - $손실 함수 \(f(x') = \max(Z(x')_y - \max\underset{i \neq y} Z(x')_i, -\kappa)\) 최소화하는 최적화 문제 설정.$  
   - $교란을 최소화하면서도 분류 오류를 유발하는 최적의 이미지 \(x'\) 생성.$  
 - **의의**: 최적화된 교란으로 기존 방어 메커니즘을 쉽게 우회할 수 있음.
 
