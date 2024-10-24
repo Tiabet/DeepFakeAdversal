@@ -27,7 +27,7 @@
 - **핵심 아이디어**: 여러 단계로 나눠 반복적인 그래디언트 업데이트를 통해 강력한 교란을 생성함.  
 - **기법 설명**:  
   - 초기화된 교란 이미지에서 매 단계 그래디언트를 이용해 업데이트하고, 허용 범위 내로 투영(projection)함.  
-  - \(x^{(t+1)} = \Pi_{B(x, \epsilon)}(x^{(t)} + \alpha \cdot \text{sign}(\nabla_x J(\theta, x^{(t)}, y)))\).  
+  - $\(x^{(t+1)} = \Pi_{B(x, \epsilon)}(x^{(t)} + \alpha \cdot \text{sign}(\nabla_x J(\theta, x^{(t)}, y)))\).  $
   - 여기서 \(B(x, \epsilon)\)은 허용 범위, \(\alpha\)는 학습률임.  
 - **의의**: FGSM보다 강력하며 다양한 연구에서 방어 기준으로 자주 사용됨.
 
