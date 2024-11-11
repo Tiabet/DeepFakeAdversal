@@ -12,23 +12,29 @@ class DSFD(nn.Module):
         # Backbone: Use ResNet-50 layers as the feature extractor
         self.backbone = nn.Sequential(*list(base_model.children())[:-2])
 
+        # Reduce channels from 2048 to 1024
+        self.reduce_channels = nn.Conv2d(2048, 1024, kernel_size=1, stride=1)
+
         # Additional feature extraction layers (dual shot layers)
         self.extras = nn.ModuleList([
-            nn.Conv2d(2048, 512, kernel_size=1, stride=1),
+            nn.Conv2d(1024, 512, kernel_size=1, stride=1),
             nn.Conv2d(512, 1024, kernel_size=3, stride=2, padding=1),
             nn.Conv2d(1024, 512, kernel_size=1, stride=1),
             nn.Conv2d(512, 256, kernel_size=3, stride=2, padding=1)
         ])
 
+        # Define anchor boxes count for each feature map layer
+        self.num_anchors = [4, 6]  # Assuming 4 and 6 anchors for each feature map
+
         # Confidence and localization layers
         self.confidence_layers = nn.ModuleList([
-            nn.Conv2d(1024, 21, kernel_size=3, padding=1),
-            nn.Conv2d(512, 21, kernel_size=3, padding=1)
+            nn.Conv2d(1024, self.num_anchors[0] * 21, kernel_size=3, padding=1),
+            nn.Conv2d(512, self.num_anchors[1] * 21, kernel_size=3, padding=1)
         ])
 
         self.localization_layers = nn.ModuleList([
-            nn.Conv2d(1024, 4 * 4, kernel_size=3, padding=1),
-            nn.Conv2d(512, 4 * 4, kernel_size=3, padding=1)
+            nn.Conv2d(1024, self.num_anchors[0] * 4, kernel_size=3, padding=1),
+            nn.Conv2d(512, self.num_anchors[1] * 4, kernel_size=3, padding=1)
         ])
 
     def forward(self, x):
@@ -36,6 +42,7 @@ class DSFD(nn.Module):
 
         # Backbone pass
         x = self.backbone(x)
+        x = F.relu(self.reduce_channels(x))
         features.append(x)
 
         # Additional layers
@@ -45,12 +52,18 @@ class DSFD(nn.Module):
 
         # Confidence and localization predictions
         confs, locs = [], []
-        for (x, conf_layer, loc_layer) in zip(features, self.confidence_layers, self.localization_layers):
-            confs.append(conf_layer(x).permute(0, 2, 3, 1).contiguous())
-            locs.append(loc_layer(x).permute(0, 2, 3, 1).contiguous())
+        for (x, conf_layer, loc_layer, num_anchors) in zip(
+                features, self.confidence_layers, self.localization_layers, self.num_anchors):
+            # Confidence predictions
+            conf = conf_layer(x).permute(0, 2, 3, 1).contiguous()
+            confs.append(conf.view(conf.size(0), -1))
 
-        confs = torch.cat([c.view(c.size(0), -1) for c in confs], 1)
-        locs = torch.cat([l.view(l.size(0), -1) for l in locs], 1)
+            # Localization predictions
+            loc = loc_layer(x).permute(0, 2, 3, 1).contiguous()
+            locs.append(loc.view(loc.size(0), -1))
+
+        confs = torch.cat(confs, 1)
+        locs = torch.cat(locs, 1)
 
         return confs, locs
 
