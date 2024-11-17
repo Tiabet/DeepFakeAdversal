@@ -1,6 +1,6 @@
 import torch
 import math
-import torch_utils
+from . import torch_utils
 from torchvision.ops.boxes import nms
 import cv2
 

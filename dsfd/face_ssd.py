@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
 
-from utils import Detect, PriorBox
+from .utils import Detect, PriorBox
 
 
 
