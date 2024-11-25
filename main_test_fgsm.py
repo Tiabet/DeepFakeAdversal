@@ -68,5 +68,5 @@ def fgsm_example(image_path, epsilon=0.02):
     plt.show()
 
 if __name__ == '__main__':
-    image_path = 'dsfd/unnamed.jpg'  # Change to your image path
+    image_path = 'dsfd_modified/unnamed.jpg'  # Change to your image path
     fgsm_example(image_path, epsilon=0.02)

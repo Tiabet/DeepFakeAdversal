@@ -1,7 +1,7 @@
 import cv2
 import time
-from dsfd import dsfd  # Import only the DSFD detector
-from dsfd.utils import draw_predict
+from DSFD import dsfd  # Import only the DSFD detector
+from DSFD.utils import draw_predict
 
 def detect_faces_in_image(image_path, save=False, blur_faces=False):
     """
@@ -51,12 +51,12 @@ def detect_faces_in_image(image_path, save=False, blur_faces=False):
 
     # Save the output image with bounding boxes if needed
     if save:
-        output_path = image_path.replace('.jpg', '_output.jpg')
+        output_path = image_path.replace('.jpg', 'detection_output.jpg')
         cv2.imwrite(output_path, image)
         print(f"[INFO] Output image with bounding boxes saved as {output_path}")
 
 
 if __name__ == '__main__':
     # Modify this line to the path of your image file
-    image_path = 'dsfd/unnamed.jpg'
+    image_path = 'dsfd_modified/unnamed_perturbed.jpg_eps_0.1.jpg'
     detect_faces_in_image(image_path, save=True, blur_faces=False)
