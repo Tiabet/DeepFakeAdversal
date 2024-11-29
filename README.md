@@ -1,4 +1,4 @@
-# DeepFake Adversarial Attack 연구 (수정중)
+# DeepFake Adversarial Attack 연구
 
 ## 관련 논문
 
